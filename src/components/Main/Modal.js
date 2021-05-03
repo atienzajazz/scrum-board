@@ -78,7 +78,7 @@ const Modal = (props) => {
     <Container visible={visible}>
       <ModalContent>
         <ModalHeader>
-          <CloseButton onClick={() => handleClose()}>&times;</CloseButton>
+          <CloseButton onClick={handleClose}>&times;</CloseButton>
         </ModalHeader>
         <ModalBody>
           {children}
