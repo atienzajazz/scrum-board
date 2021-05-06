@@ -7,17 +7,16 @@ const animateTop = keyframes`
 `;
 
 const Container = styled.div`
-  display: ${({ visible }) => visible ? 'block' : 'none'}; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: ${({ visible }) => visible ? 'block' : 'none'}; 
+  position: fixed; 
+  z-index: 1; 
   padding-top: 5vh;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%; 
+  height: 100%;
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.4); 
 `;
 
 const ModalContent = styled.div`
@@ -26,35 +25,47 @@ const ModalContent = styled.div`
   margin: auto;
   padding: 0;
   border: 1px solid #888;
-  width: 60%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  width: 40%;
   animation-name: ${animateTop};
   animation-duration: 0.4s;
+  border-radius: 1em 1em 1em 1em;
+  @media  (max-width: 700px) {
+    width: 80vw;
+    margin-left: 0;
+  }
 `;
 
 
 const ModalHeader = styled.header`
+  position: inherit;
   padding: 2px 16px;
-  background-color: #6DF48B;
+  background-color: #f3d2c1;
   color: white;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  border-radius: .9em .9em 0 0;
+  box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.25);
 `;
 
 const ModalBody = styled.div`
+  position: relative;
   padding: 1em 16px;
+  border-radius: 1em;
 `;
 
 const ModalFooter = styled.footer`
+  position: relative;
   padding: 2px 16px;
-  background-color: #6DF48B;
+  background-color: #f3d2c1;
   color: white;
   height: 1em;
+  border-radius: 0 0 .9em .9em;
+  box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.25);
 `
 
 const CloseButton = styled.span`
-  color: black;
+  color: white;
   font-size: 28px;
   font-weight: bold;
   display: inline;

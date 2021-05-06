@@ -9,6 +9,11 @@ const Style = createGlobalStyle`
         padding: 0px;
         box-sizing: border-box;
         font-family: "Poppins", 'Courier New';
+        
+    }
+    body {
+        background: #faeee7;
+        height: 100%;
     }
 `
 
