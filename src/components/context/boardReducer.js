@@ -40,47 +40,25 @@ export const actions = {
     searchTasks: (searchInput) => async (dispatch) => {
         const { tasks: currentTasks, columns: currentColumns } = getAllDataFromStorage();
 
-        // Collect keys and values.
-        const taskValues = Array.from(Object.values(currentTasks));
-        const taskKeys = Array.from(Object.keys(currentTasks));
+        let newColumns = {
+            ...currentColumns,
+        }
 
-        let filtered = taskValues.filter(task => {
-            const taskContent = task.content.toLowerCase();
-            return taskContent.includes(searchInput);
-        });
-
-        const newTasks = {}
-
-        // Use foreach to generate the new tasks state
-        filtered.forEach((value) => {
-            newTasks[value.id] = value;
-        })
-
-        // Generate the new Tasks IDs on each Column
-        let newTaskIds = {};
-        filtered.forEach(task => {
-            newTaskIds[task.column] = [];
-        });
-        filtered.forEach(task => {
-            newTaskIds[task.column] = [
-                ...newTaskIds[task.column],
-                task.id
-            ];
-        });
-        const newColumns = { ...currentColumns };
         const columnKeys = Object.keys(currentColumns);
-        columnKeys.forEach(key => {
-            newColumns[key].taskIds = [];
-        });
+        columnKeys.forEach(columnKey => {
+            const currentColumnTaskIds = [...currentColumns[columnKey].taskIds];
 
-        const entries = Object.entries(newTaskIds);
-        entries.forEach(([key, value]) => {
-            newColumns[key] = {
-                ...newColumns[key],
-                taskIds: value
+            const newTaskIds = currentColumnTaskIds.filter(taskId => {
+                const taskContent = currentTasks[taskId].content.toLowerCase();
+                return taskContent.includes(searchInput);
+            })
+
+            newColumns[columnKey] = {
+                ...newColumns[columnKey],
+                taskIds: newTaskIds
             }
         })
-        dispatch({ type: SEARCH_TASK, tasks: newTasks, columns: newColumns });
+        dispatch({ type: SEARCH_TASK, columns: newColumns });
 
     },
 
@@ -138,7 +116,6 @@ export const actions = {
         }
 
 
-
         const startTaskIds = Array.from(start.taskIds).filter(ctaskId => ctaskId !== taskId);
 
         // Handle the chosen column
@@ -180,9 +157,11 @@ export const actions = {
         dispatch({ type: DELETE_TASK, tasks, columns: newColumns })
     },
 
-    reorderTaskAndColumns: (result, state) => async (dispatch) => {
+    reorderTaskAndColumns: (result) => async (dispatch) => {
         const { destination, source, draggableId } = result;
-        const { columns } = state;
+        const { columns } = getAllDataFromStorage();
+        const searchBar = document.getElementById('search-input');
+        console.dir(searchBar);
         if (!destination ||
             (destination.droppableId === source.droppableId &&
                 destination.index === source.index)) {
@@ -258,7 +237,7 @@ export function reducer(state = initialState, action) {
         case SEARCH_TASK:
             return {
                 ...state,
-                tasks,
+                // tasks,
                 columns
             }
         case ADD_TASK:

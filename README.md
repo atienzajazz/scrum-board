@@ -27,6 +27,7 @@ Scrum Board App to manage tasks with ease.
 - [styled-components] - CSS in JS styling for web apps
 - [react-hook-form] - Performant, flexible and extensible forms with easy-to-use validation.
 - This project was bootstrapped with [Create React App].
+- [Happy Heus] - palette styles
 
 ---
 
@@ -39,3 +40,4 @@ MIT
 [styled-components]: https://styled-components.com/
 [react-hook-form]: https://react-hook-form.com/
 [create react app]: https://github.com/facebook/create-react-app
+[happy heus]: https://www.happyhues.co/palettes/15
