@@ -50,7 +50,7 @@ function Header() {
 
     return (
         <StyledHeader>
-            <input type="text" placeholder="Search Story" onChange={handleOnChange} />
+            <input type="text" placeholder="Search Story" id="search-input" onChange={handleOnChange} />
             <StyledButton onClick={handleModal}>Add Story</StyledButton>
             {visible && modal()}
         </StyledHeader>);

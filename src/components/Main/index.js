@@ -8,8 +8,8 @@ const HeroPage = styled.div`
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
-    width: 100vw;
     gap: 10px; 
+    overflow: auto;
 `;
 
 const Content = styled.main`

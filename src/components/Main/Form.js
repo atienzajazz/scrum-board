@@ -76,7 +76,7 @@ function Form(props) {
             <FormContainer onSubmit={handleSubmit(onSubmit)}>
 
                 <label htmlFor="content">Task:</label>
-                <input
+                <textarea
                     defaultValue={content}
                     id="content"
                     {...register("content")} />

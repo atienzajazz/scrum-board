@@ -25,12 +25,12 @@ const ModalContent = styled.div`
   margin: auto;
   padding: 0;
   border: 1px solid #888;
-  width: 40%;
+  width: 60vw;
   animation-name: ${animateTop};
   animation-duration: 0.4s;
   border-radius: 1em 1em 1em 1em;
   @media  (max-width: 700px) {
-    width: 80vw;
+    width: 100vw;
     margin-left: 0;
   }
 `;
