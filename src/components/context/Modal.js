@@ -1,22 +1,22 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from "react";
+import styled, { keyframes } from "styled-components";
 
 const animateTop = keyframes`
-  from {top:-300px; opacity:0} 
+  from {top:-300px; opacity:0}
   to {top:0; opacity:1}
 `;
 
 const Container = styled.div`
-  display: ${({ visible }) => visible ? 'block' : 'none'}; 
-  position: fixed; 
-  z-index: 1; 
+  display: ${({ visible }) => (visible ? "block" : "none")};
+  position: fixed;
+  z-index: 1;
   padding-top: 5vh;
   left: 0;
   top: 0;
-  width: 100%; 
+  width: 100%;
   height: 100%;
-  overflow: auto; 
-  background-color: rgba(0,0,0,0.4); 
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
 `;
 
 const ModalContent = styled.div`
@@ -29,12 +29,11 @@ const ModalContent = styled.div`
   animation-name: ${animateTop};
   animation-duration: 0.4s;
   border-radius: 1em 1em 1em 1em;
-  @media  (max-width: 700px) {
+  @media (max-width: 700px) {
     width: 100vw;
     margin-left: 0;
   }
 `;
-
 
 const ModalHeader = styled.header`
   position: inherit;
@@ -44,7 +43,7 @@ const ModalHeader = styled.header`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  border-radius: .9em .9em 0 0;
+  border-radius: 0.9em 0.9em 0 0;
   box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.25);
 `;
 
@@ -60,27 +59,26 @@ const ModalFooter = styled.footer`
   background-color: #f3d2c1;
   color: white;
   height: 1em;
-  border-radius: 0 0 .9em .9em;
+  border-radius: 0 0 0.9em 0.9em;
   box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.25);
-`
+`;
 
 const CloseButton = styled.span`
   color: white;
   font-size: 28px;
   font-weight: bold;
   display: inline;
-  &:hover{
+  &:hover {
     color: #000;
     text-decoration: none;
     cursor: pointer;
   }
-  &:focus{
+  &:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
   }
 `;
-
 
 const Modal = (props) => {
   const { children, visible, handleClose } = props;
@@ -91,13 +89,11 @@ const Modal = (props) => {
         <ModalHeader>
           <CloseButton onClick={handleClose}>&times;</CloseButton>
         </ModalHeader>
-        <ModalBody>
-          {children}
-        </ModalBody>
+        <ModalBody>{children}</ModalBody>
         <ModalFooter />
       </ModalContent>
     </Container>
-  )
-}
+  );
+};
 
 export default Modal;

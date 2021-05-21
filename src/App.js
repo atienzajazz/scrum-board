@@ -1,7 +1,6 @@
-import React from 'react';
-import ScrumBoard from './components/Main'
-import BoardContext from './components/context/BoardContext'
-
+import React from "react";
+import ScrumBoard from "./components/ScrumBoard";
+import BoardContext from "./components/context/BoardContext";
 
 function App() {
   return (
