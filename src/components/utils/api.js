@@ -94,6 +94,7 @@ export const updateTaskAPI = (taskId, startColumnId, submitData) => {
         tasks: newTasksOnStorage,
         columns: currentColumns,
       });
+      return;
     }
 
     const startTaskIds = Array.from(start.taskIds).filter(
@@ -159,13 +160,11 @@ function isSameSpot(destination, source) {
   );
 }
 
-export const reorderTaskAPI = (result, state) => {
+export const reorderTaskAPI = (result, state, searchBarValue) => {
   return new Promise((resolve) => {
     const { destination, source, draggableId } = result;
-    console.log("The spurce", source);
-    console.log("The destination", destination);
-    console.log("The destination", draggableId);
     const { columns: currentColumns } = getAllDataFromStorage();
+    const { columns: stateColumns } = state;
 
     if (isSameSpot(destination, source)) {
       return;
@@ -176,13 +175,23 @@ export const reorderTaskAPI = (result, state) => {
     const start = currentColumns[startColumnId];
     const finish = currentColumns[finishColumnId];
 
+    // Get the tasks IDs from storage
+    const startTaskIds = Array.from(start.taskIds);
+    // Get current State
+    const stateTaskIds = Array.from(stateColumns[startColumnId].taskIds);
+
+    // Reorder when on the same Column
     if (start === finish) {
-      // Reorder the taskId's on the same column
-      let newTaskIds = reorder(
-        [...start.taskIds],
-        source.index,
-        destination.index
-      );
+      let newTaskIds;
+      if (searchBarValue) {
+        const temp = startTaskIds.filter(
+          (taskId) => !stateTaskIds.includes(taskId)
+        );
+        newTaskIds = reorder(stateTaskIds, source.index, destination.index);
+        newTaskIds = [...newTaskIds, ...temp];
+      } else {
+        newTaskIds = reorder(startTaskIds, source.index, destination.index);
+      }
 
       const newColumn = {
         ...start,
@@ -200,7 +209,17 @@ export const reorderTaskAPI = (result, state) => {
     }
 
     // Moving from one list to another
-    const moved = moveBetween(start, finish, source, destination);
+    let moved;
+    if (startTaskIds !== stateTaskIds) {
+      moved = moveBetween(
+        start,
+        finish,
+        { ...source, index: startTaskIds.indexOf(draggableId) },
+        destination
+      );
+    } else {
+      moved = moveBetween(start, finish, source, destination);
+    }
 
     const newColumns = {
       ...currentColumns,

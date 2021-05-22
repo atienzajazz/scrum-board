@@ -61,8 +61,8 @@ export const actions = {
   },
 
   reorderTaskAndColumns: (result, state) => async (dispatch) => {
-    const { columns } = await reorderTaskAPI(result, state);
     const searchBarValue = document.getElementById("search-input").value;
+    const { columns } = await reorderTaskAPI(result, state, searchBarValue);
 
     if (searchBarValue) {
       actions.searchTasks(searchBarValue.toLowerCase())(dispatch);
