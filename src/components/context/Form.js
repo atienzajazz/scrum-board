@@ -14,7 +14,8 @@ const FormContainer = styled.form`
     font-size: 0.8em;
   }
   input,
-  select {
+  select,
+  textarea {
     padding: 0.5em;
   }
 `;
@@ -62,13 +63,10 @@ function Form(props) {
   const onSubmit = async (data) => {
     if (!taskId) {
       addTask(data)(dispatch);
-      handleModal();
     } else {
       updateTask(taskId, columnId, data)(dispatch);
-      if (columnId === data.column) {
-        handleModal();
-      }
     }
+    handleModal();
   };
 
   return (
@@ -84,7 +82,7 @@ function Form(props) {
         <div className="invalid">{errors.content?.message}</div>
 
         <label htmlFor="status">Status:</label>
-        <select {...register("column")} defaultValue={columnId}>
+        <select {...register("column")} defaultValue={columnId} id="status">
           {Object.values(columns).map((column) => (
             <option value={column.id} key={column.id}>
               {column.title}
@@ -93,7 +91,11 @@ function Form(props) {
         </select>
 
         <label htmlFor="points">Points:</label>
-        <input {...register("points")} defaultValue={points ? points : 0} />
+        <input
+          {...register("points")}
+          defaultValue={points ? points : 0}
+          id="points"
+        />
         <div className="invalid">{errors.points?.message}</div>
 
         <input type="submit" id="submitButton" />
