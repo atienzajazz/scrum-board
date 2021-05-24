@@ -32,7 +32,7 @@ function Header() {
 
   const handleOnChange = (e) => {
     const searchInput = e.target.value;
-    searchTasks(searchInput.toLowerCase())(dispatch);
+    searchTasks(searchInput)(dispatch);
   };
 
   return (

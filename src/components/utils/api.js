@@ -24,7 +24,7 @@ export const searchTasksAPI = (searchInput) => {
 
       const newTaskIds = currentColumnTaskIds.filter((taskId) => {
         const taskContent = currentTasks[taskId].content.toLowerCase();
-        return taskContent.includes(searchInput);
+        return taskContent.includes(searchInput.toLowerCase());
       });
 
       newColumns[columnKey] = {

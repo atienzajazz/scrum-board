@@ -8,7 +8,7 @@ const Container = styled.div`
   display: flex;
 `;
 
-const Scrum = () => {
+const DragNDropBoard = () => {
   const {
     actions: { reorderTaskAndColumns },
     state,
@@ -36,4 +36,4 @@ const Scrum = () => {
   );
 };
 
-export default Scrum;
+export default DragNDropBoard;
