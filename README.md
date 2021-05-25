@@ -1,5 +1,7 @@
 # Scrum Board
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d5e43f52-dafe-409e-be25-cf7a296b932e/deploy-status)](https://app.netlify.com/sites/scrum-board-app/deploys)
+
 Scrum Board App to manage tasks with ease.
 
 > Warning : It uses localstorage to store your tasks.
